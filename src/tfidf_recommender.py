@@ -4,6 +4,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 def build_tfidf_recommender(lyrics_path: str):
     lyrics_df = pd.read_csv(lyrics_path)
+    lyrics_df = lyrics_df.drop_duplicates(subset=["track_name", "artist"])
     lyrics_df = lyrics_df.reset_index(drop=True)  # ensure index aligns with matrix rows
 
     tfidf = TfidfVectorizer(
